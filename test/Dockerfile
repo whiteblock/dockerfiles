@@ -9,12 +9,7 @@ RUN apt install -y git build-essential libtool autotools-dev automake pkg-config
 	apt install -y libdb4.8-dev libdb4.8++-dev && \
 	apt install -y iputils-ping
 
-#RUN git clone https://github.com/syscoin/syscoin.git &&\
-#	cd syscoin &&\
-#	./autogen.sh &&\
-#	./configure &&\
-#	make &&\
-#	make install
+RUN apt install -y net-tools
 
 
 EXPOSE 30303 8368

@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 LABEL maintainer="zak@whiteblock.io"
 
-RUN apt update && apt install -y apt-utils && apt install -y expect nodejs git git-extras software-properties-common tmux && mkdir /whiteblock
+RUN apt update && apt install -y apt-utils tzdata && apt install -y expect nodejs git git-extras software-properties-common tmux && mkdir /whiteblock
 #ethereum built in another layer
 RUN add-apt-repository -y ppa:ethereum/ethereum && apt update && apt install -y ethereum
 
