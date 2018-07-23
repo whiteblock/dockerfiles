@@ -1,10 +1,13 @@
 FROM ubuntu:latest
 LABEL maintainer="zak@whiteblock.io"
 
-RUN apt update && apt install -y apt-utils tzdata && apt install -y expect nodejs git git-extras software-properties-common tmux && mkdir /whiteblock
+RUN apt update && apt install -y apt-utils tzdata &&\
+	apt install -y expect npm git git-extras software-properties-common tmux
 #ethereum built in another layer
 RUN add-apt-repository -y ppa:ethereum/ethereum && apt update && apt install -y ethereum
 
+RUN git clone https://github.com/cubedro/eth-net-intelligence-api.git &&\
+	npm install pm2 --global
 
 EXPOSE 30303
 EXPOSE 8545
