@@ -6,11 +6,11 @@ RUN apt update && apt install -y apt-utils tzdata &&\
 #ethereum built in another layer
 RUN add-apt-repository -y ppa:ethereum/ethereum && apt update && apt install -y ethereum
 
-RUN git clone https://github.com/cubedro/eth-net-intelligence-api.git &&\
-	npm install pm2 --global
+RUN git clone https://bitbucket.org/whiteblockio/eth-net-intelligence-api.git &&\
+	npm install pm2 --global &&\
+	cd /eth-net-intelligence-api &&\
+	npm install
 
-EXPOSE 30303
-EXPOSE 8545
-EXPOSE 30301
-EXPOSE 30301/udp
+RUN apt install -y iputils-ping 
+EXPOSE 30303 8545 30301 30301/udp
 ENTRYPOINT ["/bin/bash"]
