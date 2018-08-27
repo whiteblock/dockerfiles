@@ -12,5 +12,5 @@ RUN git clone https://bitbucket.org/whiteblockio/eth-net-intelligence-api.git &&
 	npm install
 
 RUN apt install -y iputils-ping 
-EXPOSE 30303 8545 30301 30301/udp
+EXPOSE 30303 8545 8546 30301 30301/udp
 ENTRYPOINT ["/bin/bash"]
