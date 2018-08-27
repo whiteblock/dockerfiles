@@ -11,7 +11,7 @@ RUN apt install -y build-essential libtool autotools-dev automake pkg-config lib
 
 RUN git clone https://github.com/syscoin/syscoin.git &&\
 	cd syscoin &&\
-	git checkout -b test remotes/origin/dev-3.x-tpstest &&\
+	git checkout -b test remotes/origin/dev-3.x-prep-3.2.0 &&\
 	./autogen.sh &&\
 	./configure --enable-tests &&\
 	make -j16 &&\
