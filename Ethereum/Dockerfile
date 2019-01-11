@@ -6,9 +6,9 @@ RUN apt-get update &&\
 	inetutils-tools wget ca-certificates curl build-essential libssl-dev golang-go make iperf3 openssh-server 
 
 # builds out geth
-RUN git clone https://github.com/zscole/go-ethereum
-WORKDIR /go-ethereum
-RUN make all
+RUN git clone https://github.com/zscole/go-ethereum &&\
+	cd /go-ethereum &&\
+	make all
 
 # sets up eth net intelligence api & dependencies
 RUN git clone https://bitbucket.org/whiteblockio/eth-net-intelligence-api.git 
