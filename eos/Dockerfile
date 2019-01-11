@@ -1,20 +1,13 @@
-FROM eosio/builder as builder
+FROM ubuntu:latest 
 
-RUN git clone https://github.com/EOSIO/eos.git --recursive 
-WORKDIR /eos
-RUN cmake -DBINARYEN_BIN=/eos/externals/binaryen/bin -DWASM_ROOT=/opt/wasm -DOPENSSL_ROOT_DIR=/usr/bin/openssl -DOPENSSL_LIBRARIES=/usr/lib/ssl -DBUILD_MONGO_DB_PLUGIN=true .
-RUN make 
-RUN make install
+ENV DEBIAN_FRONTEND=noninteractive
 
-ENV PATH=/usr/local/eosio/bin/:$PATH
+RUN apt-get update &&\
+    apt-get install -y apt-utils iputils-ping expect git git-extras \
+    software-properties-common tmux vim inetutils-tools wget ca-certificates \
+    curl build-essential libssl-dev iperf3 openssh-server
 
-FROM ubuntu:18.04
+RUN wget https://github.com/eosio/eos/releases/download/v1.5.3/eosio_1.5.3-1-ubuntu-18.04_amd64.deb &&\
+    apt install -y ./eosio_1.5.3-1-ubuntu-18.04_amd64.deb
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssl ca-certificates
-COPY --from=builder /usr/local/eosio/bin/ /opt/eosio/bin
-ENV EOSIO_ROOT=/opt/eosio
-ENV PATH /opt/eosio/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
-EXPOSE 8889 8899
-
-CMD ["/bin/bash"]
+ENTRYPOINT ["/bin/bash"]
