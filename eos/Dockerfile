@@ -39,6 +39,5 @@ WORKDIR /
 RUN mkdir -p /opt/eosio &&\
     mv /opt/eosio.contracts/ /opt/eosio/contracts
 
-#eosio-cpp -I include -o eosio.token.wasm eosio.token.cpp --abigen
 
 ENTRYPOINT ["/bin/bash"]
