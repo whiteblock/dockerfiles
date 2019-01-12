@@ -10,4 +10,6 @@ RUN apt-get update &&\
 RUN wget https://github.com/eosio/eos/releases/download/v1.5.3/eosio_1.5.3-1-ubuntu-18.04_amd64.deb &&\
     apt install -y ./eosio_1.5.3-1-ubuntu-18.04_amd64.deb
 
+RUN git clone https://github.com/EOSIO/eos.git
+
 ENTRYPOINT ["/bin/bash"]
