@@ -1,7 +1,7 @@
 substitutions:
   _IMAGE: 'gcr.io/whiteblock/rchain'
   _DIR: 'rchain'
-timeout: '45m'
+timeout: '90m'
 steps:
 # allow these steps to fail, they try to pull cache first
 - name: 'gcr.io/cloud-builders/docker'
@@ -22,3 +22,5 @@ steps:
   args: [ 'push', '$_IMAGE:$COMMIT_SHA' ]
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'push', '$_IMAGE:$BRANCH_NAME' ]
+options:
+  machineType: 'N1_HIGHCPU_8'

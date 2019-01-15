@@ -5,7 +5,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils ca-certificates 
     software-properties-common build-essential rpm fakeroot
 
 # clones required repos
-RUN git clone https://github.com/rchain/rchain.git \
+RUN git clone https://github.com/rchain/rchain.git --branch dev \
     && git clone https://github.com/BNFC/bnfc
 
 # installs haskell
