@@ -1,5 +1,6 @@
 substitutions:
   _IMAGE: 'gcr.io/whiteblock/rchain'
+  _DIR: 'rchain'
 timeout: '45m'
 steps:
 # allow these steps to fail, they try to pull cache first
@@ -15,6 +16,7 @@ steps:
             '--cache-from', '$_IMAGE:$BRANCH_NAME',
             '.'
         ]
+  dir: '$_DIR'
 # push docker image tag(s) one branch, one immutable
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'push', '$_IMAGE:$COMMIT_SHA' ]
