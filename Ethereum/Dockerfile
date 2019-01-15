@@ -16,6 +16,9 @@ WORKDIR	/eth-net-intelligence-api
 RUN apt-get install -f -y npm nodejs
 RUN	npm install && npm install -g pm2
 
+RUN echo "PermitEmptyPasswords yes" >> /etc/ssh/sshd_config
+RUN mkdir -p /root/.ssh/
+RUN passwd -l root && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 WORKDIR /
 ENV PATH /go-ethereum/build/bin:${PATH}
 
