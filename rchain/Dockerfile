@@ -34,6 +34,6 @@ RUN sbt clean bnfc:clean bnfc:generate rholang/bnfc:generate rholang/compile rho
     comm/compile clean rholang/bnfc:generate casper/test:compile node/rpm:packageBin \
     node/debian:packageBin node/universal:packageZipTarball
 
-ENV PATH="/rchain/node/target/rnode-0.7.1/usr/share/rnode/bin/:${PATH}"
+ENV PATH="/rchain/node/target/rnode-0.8.2/usr/share/rnode/bin:${PATH}"
 
 ENTRYPOINT ["/bin/bash"]
