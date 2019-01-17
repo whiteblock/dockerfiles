@@ -2,7 +2,8 @@ FROM ubuntu:latest
 
 RUN apt-get update && apt-get -y upgrade
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils ca-certificates gnupg openjdk-8-jdk curl git-all \
-    software-properties-common build-essential rpm fakeroot
+    software-properties-common build-essential rpm fakeroot \
+    openssh-server
 
 # clones required repos
 RUN git clone https://github.com/rchain/rchain.git --branch dev \
