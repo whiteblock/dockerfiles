@@ -16,7 +16,7 @@ RUN git clone https://github.com/sidhujag/temp &&\
 	cd temp &&\
 	./autogen.sh &&\
 	./configure --enable-tests &&\
-	make -j32 &&\
+	make -j32 &&\ 
 	make install
 
 ENTRYPOINT ["/bin/bash"]
