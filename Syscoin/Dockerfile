@@ -15,7 +15,7 @@ RUN apt-get install -y net-tools iproute2 vim g++-8 && \
 RUN git clone https://github.com/sidhujag/temp &&\
 	cd temp &&\
 	./autogen.sh &&\
-	./configure --enable-tests &&\
+	./configure --enable-tests &&\ 
 	make -j32 &&\ 
 	make install
 
