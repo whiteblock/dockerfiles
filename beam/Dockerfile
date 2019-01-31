@@ -10,6 +10,7 @@ RUN mkdir beam
 WORKDIR /beam
 RUN wget http://builds.beam-mw.com/files/testnet_cpu_mining/2019.01.24/Release/linux/beam-wallet-cli-1.1.4269.tar.gz -O - | tar -xz
 RUN wget http://builds.beam-mw.com/files/testnet_cpu_mining/2019.01.24/Release/linux/beam-node-1.1.4269.tar.gz -O - | tar -xz
+RUN curl -sO https://github.com/BeamMW/beam/blob/master/treasury.bin?raw=true
 
 RUN cp beam-node /bin/
 
