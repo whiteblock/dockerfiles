@@ -16,7 +16,7 @@ RUN git clone https://github.com/sidhujag/temp &&\
 	cd temp &&\
 	./autogen.sh &&\
 	./configure --enable-tests &&\ 
-	make -j 4 &&\ 
+	make -j $(nproc) &&\ 
 	make install
 
 FROM ubuntu:latest as final
