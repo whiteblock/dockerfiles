@@ -1,4 +1,4 @@
-FROM rust:1.32.0-stretch
+FROM rust:1.32.0-stretch as built
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -21,5 +21,10 @@ RUN echo "export PATH=\"/parity-ethereum/target/release:\${PATH}\"" >> /etc/prof
 ENV PATH="/parity-ethereum/target/release:${PATH}"
 
 EXPOSE 8080 8545 8180
+
+FROM debian:stretch as final
+
+RUN apt-get update && apt-get install -y  vim iperf3 openssh-server telnet iproute2 libssl-dev iputils-ping
+COPY --from=built /parity-ethereum/target/release/parity /usr/local/bin/parity
 
 ENTRYPOINT ["/bin/bash"]
