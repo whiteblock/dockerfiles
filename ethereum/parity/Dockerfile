@@ -17,6 +17,11 @@ WORKDIR /parity-ethereum
 RUN git checkout stable
 RUN cargo clean && cargo build --release --features final
 
+RUN apt-get install -y wget 
+RUN wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.8.23-c9427004.tar.gz &&\
+    tar xzf geth-linux-amd64-1.8.23-c9427004.tar.gz geth-linux-amd64-1.8.23-c9427004/ &&\
+    mv geth-linux-amd64-1.8.23-c9427004/geth /usr/local/bin/
+
 RUN echo "export PATH=\"/parity-ethereum/target/release:\${PATH}\"" >> /etc/profile
 ENV PATH="/parity-ethereum/target/release:${PATH}"
 
@@ -26,5 +31,7 @@ FROM debian:stretch as final
 
 RUN apt-get update && apt-get install -y  vim iperf3 openssh-server telnet iproute2 libssl-dev iputils-ping
 COPY --from=built /parity-ethereum/target/release/parity /usr/local/bin/parity
+COPY --from=built /usr/local/bin/geth /usr/local/bin/geth
+WORKDIR /
 
 ENTRYPOINT ["/bin/bash"]
