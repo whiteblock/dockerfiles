@@ -14,12 +14,18 @@ def match_elapsed_vals(line):
     elapsedMatch = re.compile("elapsed=(\d+\.\d+)(\S+)").search(line)
     elapsed = elapsedMatch.group(1)
     elapsed_unit = elapsedMatch.group(2)
-
     return {
         'elapsed': float(elapsed),
         'elapsed_unit': elapsed_unit,
     }
-
+def match_hash_vals(hash_key_name, line):
+    hash = re.compile("{}=([0-9a-z]+)…([0-9a-z]+)".format(hash_key_name)).search(line)
+    hash_start = hash.group(1)
+    hash_end = hash.group(2)
+    return {
+        '{}_start'.format(hash_key_name): hash_start,
+        '{}_end'.format(hash_key_name): hash_end
+    }
 
 for line in sys.stdin:
     if block_reached_canonical_chain.search(line):
@@ -34,6 +40,8 @@ for line in sys.stdin:
                 'hash_start': hash_start,
                 'hash_end': hash_end,
             })
+        else:
+            raise Exception('failure parsing block_reached_canonical_chain')  
     elif mined_potential_block.search(line):
         number = re.compile("number=(\d+)").search(line).group(1)
         hash = re.compile("hash=([0-9a-z]+)…([0-9a-z]+)").search(line)
@@ -46,26 +54,21 @@ for line in sys.stdin:
                 'hash_start': hash_start,
                 'hash_end': hash_end,
             })
+        else:
+            raise Exception('failure parsing mined_potential_block')
     elif successfully_sealed_new_block.search(line):
         number = re.compile("number=(\d+)").search(line).group(1)
-        sealhash = re.compile("sealhash=([0-9a-z]+)…([0-9a-z]+)").search(line)
-        sealhash_start = sealhash.group(1)
-        sealhash_end = sealhash.group(2)
-        hash = re.compile("hash=([0-9a-z]+)…([0-9a-z]+)").search(line)
-        hash_start = hash.group(1)
-        hash_end = hash.group(2)
-
+        sealhash_vals = match_hash_vals('sealhash', line)
+        hash_vals = match_hash_vals('hash', line)
         elapsed_vals = match_elapsed_vals(line)  
-        if number and sealhash and elapsed_vals:
+        if number and hash_vals and sealhash_vals and elapsed_vals:
             rval = {
                 'event_type': 'successfully_sealed_new_block',
-                'number': int(number),
-                'sealhash_start': sealhash_start,
-                'sealhash_end': sealhash_end,
-                'hash_start': hash_start,
-                'hash_end': hash_end
+                'number': int(number)
             }
             rval.update(elapsed_vals)
+            rval.update(hash_vals)
+            rval.update(sealhash_vals)
             print json.dumps(rval)
         else:
             raise Exception('failure parsing successfully_sealed_new_block')
