@@ -25,42 +25,55 @@ def match_hash_vals(hash_key_name, line):
         '{}_start'.format(hash_key_name): hash_start,
         '{}_end'.format(hash_key_name): hash_end
     }
+def match_time_stamp(line):
+    time_stamp = re.compile("\[([^\]]+)\]")
+    [ datefrag, timefrag ] = time_stamp.search(line).group(1).split("|")
+    return {
+        'date_frag': datefrag,
+        'time_frag': timefrag
+    }
 
 for line in sys.stdin:
     if block_reached_canonical_chain.search(line):
         number = re.compile("number=(\d+)").search(line).group(1)
         hash_vals = match_hash_vals('hash', line)
-        if number and hash_vals:
+        time_stamp = match_time_stamp(line)
+        if number and hash_vals and time_stamp:
             rval = {
                 'event_type': 'block_reached_canonical_chain',
                 'number': int(number)
             }
             rval.update(hash_vals)
+            rval.update(time_stamp)
             print json.dumps(rval)
         else:
             raise Exception('failure parsing block_reached_canonical_chain')  
     elif mined_potential_block.search(line):
         number = re.compile("number=(\d+)").search(line).group(1)
         hash_vals = match_hash_vals('hash', line)
-        if number and hash_vals:
+        time_stamp = match_time_stamp(line)
+        if number and hash_vals and time_stamp:
             rval = {
                 'event_type': 'mined_potential_block',
                 'number': int(number)
             }
+            rval.update(time_stamp)
             rval.update(hash_vals)
             print json.dumps(rval)
         else:
             raise Exception('failure parsing mined_potential_block')
     elif successfully_sealed_new_block.search(line):
         number = re.compile("number=(\d+)").search(line).group(1)
+        time_stamp = match_time_stamp(line)
         sealhash_vals = match_hash_vals('sealhash', line)
         hash_vals = match_hash_vals('hash', line)
         elapsed_vals = match_elapsed_vals(line)  
-        if number and hash_vals and sealhash_vals and elapsed_vals:
+        if number and time_stamp and hash_vals and sealhash_vals and elapsed_vals:
             rval = {
                 'event_type': 'successfully_sealed_new_block',
                 'number': int(number)
             }
+            rval.update(time_stamp)
             rval.update(elapsed_vals)
             rval.update(hash_vals)
             rval.update(sealhash_vals)
@@ -69,13 +82,14 @@ for line in sys.stdin:
             raise Exception('failure parsing successfully_sealed_new_block')
     elif commit_new_mining_work.search(line):
         number = re.compile("number=(\d+)").search(line).group(1)
+        time_stamp = match_time_stamp(line)
         uncles = re.compile("uncles=(\d+)").search(line).group(1)
         txs = re.compile("txs=(\d+)").search(line).group(1)
         gas = re.compile("gas=(\d+)").search(line).group(1)
         fees = re.compile("fees=(\d+)").search(line).group(1)
         sealhash_vals = match_hash_vals('sealhash', line)
         elapsed_vals = match_elapsed_vals(line)  
-        if number and uncles and txs and gas and fees and sealhash_vals and elapsed_vals:
+        if number and time_stamp and uncles and txs and gas and fees and sealhash_vals and elapsed_vals:
             rval = {
                 'event_type': 'commit_new_ming_work',
                 'number': int(number),
@@ -84,6 +98,7 @@ for line in sys.stdin:
                 'gas': int(gas),
                 'fees': int(fees)
             }
+            rval.update(time_stamp)
             rval.update(elapsed_vals)
             rval.update(sealhash_vals)
             print json.dumps(rval)
