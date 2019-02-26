@@ -1,0 +1,11 @@
+FROM ubuntu:18.04 as built
+
+
+RUN apt-get update && apt-get install -f -y npm nodejs git
+# sets up eth net intelligence api & dependencies
+RUN git clone https://bitbucket.org/whiteblockio/eth-net-intelligence-api.git 
+WORKDIR /eth-net-intelligence-api 
+
+RUN npm install && npm install -g pm2
+
+ENTRYPOINT ["/bin/bash"]
