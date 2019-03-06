@@ -1,5 +1,5 @@
 substitutions:
-  _IMAGE: 'gcr.io/whiteblock/ethNetStats'
+  _IMAGE: 'gcr.io/whiteblock/ethnetstats'
   _DIR: 'ethereum/eth-net-stats'
 timeout: '90m'
 steps:
