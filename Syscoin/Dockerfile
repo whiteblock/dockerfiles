@@ -3,7 +3,7 @@ LABEL maintainer="zak@whiteblock.io"
 
 RUN apt update && apt install -y apt-utils tzdata && apt install -y expect git git-extras software-properties-common tmux
 
-RUN apt-get install -y build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 libminiupnpc-dev &&\ 
+RUN apt-get install -y build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 libminiupnpc-dev &&\
 	apt-get install -y libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev libboost-graph-dev libboost-regex-dev &&\
 	add-apt-repository -y ppa:bitcoin/bitcoin && apt update &&\
 	apt-get install -y libdb4.8-dev libdb4.8++-dev && \
@@ -15,8 +15,8 @@ RUN apt-get install -y net-tools iproute2 vim g++-8 && \
 RUN git clone https://github.com/sidhujag/temp &&\
 	cd temp &&\
 	./autogen.sh &&\
-	./configure --enable-tests &&\ 
-	make -j $(nproc) &&\ 
+	./configure --enable-tests &&\
+	make -j $(nproc) &&\
 	make install
 
 FROM ubuntu:latest as final
@@ -40,7 +40,7 @@ COPY --from=built /lib/x86_64-linux-gnu/librt.so.1 /lib/x86_64-linux-gnu/librt.s
 COPY --from=built /lib/x86_64-linux-gnu/libdl.so.2 /lib/x86_64-linux-gnu/libdl.so.2
 COPY --from=built /lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
 
-RUN apt update && apt-get install -y iputils-ping openssh-server iperf3 
+RUN apt-get update && apt-get install -y iputils-ping openssh-server iperf3 vim 
 
 ENTRYPOINT ["/bin/bash"]
 
