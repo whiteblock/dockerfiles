@@ -23,6 +23,7 @@ RUN apt-get install -y iperf3 openssh-server iputils-ping vim tmux  && apt-get c
 
 RUN	npm install && npm install -g pm2
 
+RUN ln -s /go-ethereum/build/bin/geth /usr/bin/geth
 
 WORKDIR /
 #ENV PATH /go-ethereum/build/bin:${PATH}
