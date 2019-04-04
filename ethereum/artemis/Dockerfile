@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 RUN apt-get update &&\
     DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential maven libsodium-dev \
-    tmux apt-utils iputils-ping expect npm git git-extras software-properties-common 
+    tmux vim apt-utils iputils-ping expect npm git git-extras software-properties-common 
 
 # install java
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
