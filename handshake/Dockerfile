@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update &&\
 	DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils npm nodejs \
-    tmux wget iperf3 curl apt-utils iputils-ping expect npm git git-extras \
+    tmux wget iperf3 curl apt-utils iputils-ping expect git git-extras \
     g++ gcc make python-minimal
 
 RUN git clone git://github.com/handshake-org/hsd.git
