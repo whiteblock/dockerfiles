@@ -20,7 +20,9 @@ WORKDIR /pantheon
 RUN ./gradlew build -x test
 WORKDIR /pantheon/build/distributions
 RUN tar -xzf pantheon-1.0.2-SNAPSHOT.tar.gz
-ENV PATH="/pantheon/build/distributions/pantheon-1.0.2-SNAPSHOT/bin:${PATH}"
+#ENV PATH="/pantheon/build/distributions/pantheon-1.0.2-SNAPSHOT/bin:${PATH}"
+
+RUN ln -s /pantheon/build/distributions/pantheon-1.0.2-SNAPSHOT/bin/pantheon /usr/local/bin/pantheon
 WORKDIR /
 
 ENTRYPOINT ["/bin/bash"]
