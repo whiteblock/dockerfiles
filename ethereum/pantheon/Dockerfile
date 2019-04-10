@@ -19,10 +19,10 @@ RUN git clone --recursive https://github.com/PegaSysEng/pantheon.git
 WORKDIR /pantheon
 RUN ./gradlew build -x test
 WORKDIR /pantheon/build/distributions
-RUN tar -xzf pantheon-1.0.3-SNAPSHOT.tar.gz
+RUN tar -xzf pantheon-*-SNAPSHOT.tar.gz
 #ENV PATH="/pantheon/build/distributions/pantheon-1.0.3-SNAPSHOT/bin:${PATH}"
 
-RUN ln -s /pantheon/build/distributions/pantheon-1.0.3-SNAPSHOT/bin/pantheon /usr/local/bin/pantheon
+RUN ln -s /pantheon/build/distributions/pantheon-*-SNAPSHOT/bin/pantheon /usr/local/bin/pantheon
 WORKDIR /
 
 ENTRYPOINT ["/bin/bash"]
