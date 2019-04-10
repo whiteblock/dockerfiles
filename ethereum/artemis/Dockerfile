@@ -19,8 +19,8 @@ RUN git clone --recursive https://github.com/PegaSysEng/artemis.git
 WORKDIR artemis/
 RUN ./gradlew build -x test
 WORKDIR /artemis/build/distributions
-RUN tar -xzf artemis-1.0.0-SNAPSHOT.tar.gz
-ENV PATH="/artemis/build/distributions/artemis-1.0.0-SNAPSHOT/bin:${PATH}"
+RUN tar -xzf artemis-*-SNAPSHOT.tar.gz
+RUN ln -s /artemis/build/distributions/artemis-*-SNAPSHOT/bin/artemis /usr/bin/artemis
 WORKDIR /
 
 ENTRYPOINT ["/bin/bash"]
