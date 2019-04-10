@@ -1,5 +1,5 @@
 substitutions:
-  _IMAGE: 'gcr.io/whiteblock/ethereum'
+  _IMAGE: 'gcr.io/whiteblock/geth'
   _DIR: 'ethereum/geth'
 timeout: '90m'
 steps:
