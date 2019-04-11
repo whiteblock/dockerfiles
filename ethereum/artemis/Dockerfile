@@ -20,7 +20,8 @@ WORKDIR artemis/
 RUN ./gradlew build -x test
 WORKDIR /artemis/build/distributions
 RUN tar -xzf artemis-*-SNAPSHOT.tar.gz
-RUN ln -s /artemis/build/distributions/artemis-*-SNAPSHOT/bin/artemis /usr/bin/artemis
+#RUN ln -s /artemis/build/distributions/artemis-*-SNAPSHOT/bin/artemis /usr/bin/artemis
 WORKDIR /
+ENV PATH="/artemis/build/distributions/artemis-1.0.0-SNAPSHOT/bin:${PATH}"
 
 ENTRYPOINT ["/bin/bash"]
