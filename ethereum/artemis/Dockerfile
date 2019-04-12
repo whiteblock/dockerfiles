@@ -25,5 +25,6 @@ WORKDIR /usr/local/bin
 RUN wget https://github.com/Whiteblock/artemis_log_EATER/releases/download/v1.5.7/artemis-log-parser
 
 WORKDIR /
+#ENV PATH="/artemis/build/distributions/artemis-1.0.0-SNAPSHOT/bin:${PATH}"
 
 ENTRYPOINT ["/bin/bash"]
