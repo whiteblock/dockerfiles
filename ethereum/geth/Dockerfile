@@ -5,7 +5,8 @@ RUN apt-get update &&\
 	apt-get install -y apt-utils expect git git-extras software-properties-common \
 	inetutils-tools wget ca-certificates curl build-essential libssl-dev golang-go make
 # builds out geth
-RUN git clone https://github.com/zscole/go-ethereum &&\
+RUN git clone https://github.com/n8wb/go-ethereum &&\
+	git checkout patch-1 &&\
 	cd /go-ethereum &&\
 	make all
 
