@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install \
 
 RUN git clone https://github.com/paritytech/parity-ethereum
 WORKDIR /parity-ethereum
-RUN git checkout beta
+RUN git checkout v2.4.5
 RUN cargo clean && cargo build --release --features final
 
 #RUN apt-get install -y wget 
