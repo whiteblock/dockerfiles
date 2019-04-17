@@ -6,13 +6,13 @@ RUN apt-get update && \
     software-properties-common openssh-server
 
 # install java
-RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-    add-apt-repository -y ppa:webupd8team/java && \
+RUN echo oracle-java11-installer shared/accepted-oracle-license-v1-2 select true | debconf-set-selections && \
+    add-apt-repository -y ppa:linuxuprising/java && \
     apt-get update && \
-    apt-get install -y oracle-java8-installer && \
+    apt-get install -y oracle-java11-installer && \
     rm -rf /var/lib/apt/lists/* && \
-    rm -rf /var/cache/oracle-jdk8-installer
-ENV JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+    rm -rf /var/cache/oracle-jdk11-installer
+ENV JAVA_HOME="/usr/lib/jvm/java-11-oracle"
 
 # get artemis
 RUN git clone --recursive https://github.com/PegaSysEng/artemis.git
