@@ -1,8 +1,9 @@
-FROM ubuntu:latest
+FROM ubuntu:18.04
 
-RUN apt-get update &&\
+RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential maven libsodium-dev \
-    tmux vim apt-utils iputils-ping expect npm git git-extras software-properties-common 
+    tmux wget iperf3 curl apt-utils iputils-ping expect npm git git-extras \
+    software-properties-common openssh-server
 
 # install java
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
@@ -14,9 +15,16 @@ RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true 
 ENV JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 
 # get artemis
-RUN git clone --recursive https://github.com/PegaSysEng/artemis.git 
+RUN git clone --recursive https://github.com/PegaSysEng/artemis.git
 WORKDIR artemis/
-RUN ./gradlew --no-daemon
-RUN ./gradlew mash
+RUN ./gradlew build -x test
+WORKDIR /artemis/build/distributions
+RUN tar -xzf artemis-*-SNAPSHOT.tar.gz
+RUN ln -s /artemis/build/distributions/artemis-*-SNAPSHOT/bin/artemis /usr/bin/artemis
+WORKDIR /usr/local/bin
+RUN wget https://github.com/Whiteblock/artemis_log_EATER/releases/download/v1.5.10/artemis-log-parser && chmod +x /usr/local/bin/artemis-log-parser
+
+WORKDIR /
+#ENV PATH="/artemis/build/distributions/artemis-1.0.0-SNAPSHOT/bin:${PATH}"
 
 ENTRYPOINT ["/bin/bash"]
