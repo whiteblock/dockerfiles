@@ -1,9 +1,7 @@
-# https://cloud.google.com/cloud-build/docs/speeding-up-builds
-# https://cloud.google.com/cloud-build/docs/configuring-builds/substitute-variable-values
 substitutions:
   _IMAGE: 'gcr.io/whiteblock/libp2p-test'
   _DIR: 'libp2p/libp2p-test'
-timeout: '30m'
+timeout: '90m'
 steps:
 # allow these steps to fail, they try to pull cache first
 - name: 'gcr.io/cloud-builders/docker'
@@ -15,7 +13,7 @@ steps:
             'build',
             '-t', '$_IMAGE:$BRANCH_NAME',
             '-t', '$_IMAGE:$COMMIT_SHA',
-            '--cache-from', '$_IMAGE:$BRANCH_NAME',
+#            '--cache-from', '$_IMAGE:$BRANCH_NAME',
             '.'
         ]
   dir: '$_DIR'
@@ -25,4 +23,4 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'push', '$_IMAGE:$BRANCH_NAME' ]
 options:
- machineType: 'N1_HIGHCPU_8'
+  machineType: 'N1_HIGHCPU_32'
