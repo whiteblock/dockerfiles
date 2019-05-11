@@ -1,6 +1,6 @@
 FROM golang:1.12.3-stretch
 
-ADD . /libp2p
+RUN git clone https://github.com/Whiteblock/p2p-tests.git libp2p
 
 WORKDIR /libp2p
 
