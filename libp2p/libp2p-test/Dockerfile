@@ -1,6 +1,8 @@
 FROM golang:1.12.3-stretch
 
-RUN git clone https://github.com/Whiteblock/p2p-tests.git p2p-tests
+WORKDIR /
+
+RUN git clone https://github.com/Whiteblock/p2p-tests.git
 
 WORKDIR /p2p-tests
 
