@@ -10,4 +10,6 @@ RUN go get || true
 
 RUN go build
 
+RUN apt-get install -y iperf3 openssh-server iputils-ping vim tmux  && apt-get clean
+
 ENTRYPOINT ["/bin/bash"]
