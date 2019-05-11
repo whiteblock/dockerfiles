@@ -2,6 +2,7 @@
 # https://cloud.google.com/cloud-build/docs/configuring-builds/substitute-variable-values
 substitutions:
   _IMAGE: 'gcr.io/whiteblock/libp2p-test'
+  _DIR: 'libp2p/libp2p-test'
 timeout: '30m'
 steps:
 # allow these steps to fail, they try to pull cache first
