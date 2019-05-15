@@ -1,6 +1,6 @@
 substitutions:
-  _IMAGE: 'gcr.io/whiteblock/parity'
-  _DIR: 'ethereum/parity'
+  _IMAGE: 'gcr.io/whiteblock/prysm'
+  _DIR: 'ethereum/prysm'
 timeout: '90m'
 steps:
 # allow these steps to fail, they try to pull cache first

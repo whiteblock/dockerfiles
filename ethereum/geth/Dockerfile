@@ -1,5 +1,5 @@
 FROM ubuntu:18.04 as built
-  
+
 RUN apt-get update &&\
     DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils expect git git-extras software-properties-common \
     inetutils-tools wget ca-certificates curl build-essential libssl-dev golang-go make
@@ -7,6 +7,7 @@ RUN apt-get update &&\
 RUN git clone https://github.com/zscole/go-ethereum &&\
         cd /go-ethereum &&\
         make all
+
 
 FROM ubuntu:18.04 as final
 
