@@ -1,7 +1,9 @@
 FROM ubuntu:18.04
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential maven libsodium-dev \
+    apt-get install -y build-essential maven libsodium-dev \
     tmux wget iperf3 curl apt-utils iputils-ping expect npm git git-extras \
     software-properties-common openssh-server 
 
