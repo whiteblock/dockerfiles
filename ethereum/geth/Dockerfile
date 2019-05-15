@@ -1,7 +1,9 @@
 FROM ubuntu:18.04 as built
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get update &&\
-    DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils expect git git-extras software-properties-common \
+    apt-get install -y apt-utils expect git git-extras software-properties-common \
     inetutils-tools wget ca-certificates curl build-essential libssl-dev golang-go make
 # builds out geth
 RUN git clone https://github.com/zscole/go-ethereum &&\
