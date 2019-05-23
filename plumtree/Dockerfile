@@ -7,4 +7,6 @@ RUN apt-get update &&\
     tmux wget iperf3 curl apt-utils iputils-ping expect git git-extras \
     software-properties-common openssh-server 
 
+RUN ln -s /usr/gossip/bin/gossip /usr/bin/gossip
+
 ENTRYPOINT ["/bin/bash"]
