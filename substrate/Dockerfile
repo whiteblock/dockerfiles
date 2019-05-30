@@ -3,7 +3,8 @@ FROM phusion/baseimage:0.10.2
 RUN apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y cmake pkg-config libssl-dev clang expect git git-extras openssh-server \
-	software-properties-common inetutils-tools wget ca-certificates curl build-essential
+	software-properties-common inetutils-tools wget ca-certificates curl build-essential iperf \
+	vim make
 RUN git clone https://github.com/paritytech/substrate.git
 
 WORKDIR /substrate
