@@ -13,12 +13,14 @@ RUN add-apt-repository ppa:openjdk-r/ppa && \
 
 
 # get sysethereum-agents
-RUN git clone --recursive https://github.com/syscoin/sysethereum-agents.git
+RUN git clone https://github.com/syscoin/sysethereum-agents.git
 WORKDIR sysethereum-agents/
 RUN mvn package
 WORKDIR /sysethereum-agents/target
 RUN ln -s *-jar-with-dependencies.jar syseth.jar
 
 WORKDIR /
+# get sysethereum-contracts
+RUN git clone https://github.com/syscoin/sysethereum-contracts.git contracts
 
 ENTRYPOINT [ "java", "-Xmx1g", "-jar", "/sysethereum-agents/target/syseth.jar" ]
