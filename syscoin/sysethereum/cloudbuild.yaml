@@ -1,6 +1,6 @@
 substitutions:
-  _IMAGE: 'gcr.io/whiteblock/syscoin'
-  _DIR: 'syscoin'
+  _IMAGE: 'gcr.io/whiteblock/sysethereum-agents'
+  _DIR: 'syscoin/sysethereum'
 timeout: '90m'
 steps:
 # allow these steps to fail, they try to pull cache first
