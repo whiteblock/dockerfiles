@@ -24,3 +24,4 @@ steps:
   args: [ 'push', '$_IMAGE:$BRANCH_NAME' ]
 options:
   machineType: 'N1_HIGHCPU_32'
+images: ['$_IMAGE:$BRANCH_NAME', '$_IMAGE:$COMMIT_SHA']
