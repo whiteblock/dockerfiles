@@ -1,5 +1,6 @@
 substitutions:
   _IMAGE: 'gcr.io/whiteblock/ethclassic'
+  _IMAGE_ALT: 'gcr.io/whiteblock/etc'
   _DIR: 'ethereum/classic'
 timeout: '90m'
 steps:
@@ -13,6 +14,8 @@ steps:
             'build',
             '-t', '$_IMAGE:$BRANCH_NAME',
             '-t', '$_IMAGE:$COMMIT_SHA',
+            '-t', '$_IMAGE_ALT:$BRANCH_NAME',
+            '-t', '$_IMAGE_ALT:$COMMIT_SHA',
             '--cache-from', '$_IMAGE:$BRANCH_NAME',
             '.'
         ]
@@ -22,6 +25,10 @@ steps:
   args: [ 'push', '$_IMAGE:$COMMIT_SHA' ]
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'push', '$_IMAGE:$BRANCH_NAME' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', '$_IMAGE_ALT:$COMMIT_SHA' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', '$_IMAGE_ALT:$BRANCH_NAME' ]
 options:
   machineType: 'N1_HIGHCPU_8'
-images: ['$_IMAGE:$BRANCH_NAME', '$_IMAGE:$COMMIT_SHA']
+images: ['$_IMAGE:$BRANCH_NAME', '$_IMAGE:$COMMIT_SHA', '$_IMAGE_ALT:$BRANCH_NAME', '$_IMAGE_ALT:$COMMIT_SHA']
