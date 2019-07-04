@@ -15,8 +15,4 @@ WORKDIR /prysm/
 RUN git checkout cli
 RUN bazel build //beacon-chain:beacon-chain
 
-FROM ubuntu:18.04
-WORKDIR /prysm
-COPY --from=0 /prysm/bazel-bin/beacon-chain/linux_amd64_stripped/beacon-chain .
-
 ENTRYPOINT ["/bin/bash"]
