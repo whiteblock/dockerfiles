@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
+WORKDIR /prysm/
 
-ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update &&\
 	apt-get install -y apt-utils expect git git-extras software-properties-common \
 	inetutils-tools wget ca-certificates curl build-essential libssl-dev golang-go \
@@ -11,8 +11,10 @@ RUN chmod +x bazel-0.25.1-installer-linux-x86_64.sh
 RUN ./bazel-0.25.1-installer-linux-x86_64.sh
 
 RUN git clone https://github.com/renaynay/prysm.git
-WORKDIR /prysm/
+RUN git reset --hard HEAD
 RUN git checkout cli
+RUN git pull
+
 RUN bazel build //beacon-chain:beacon-chain
 
 ENTRYPOINT ["/bin/bash"]
