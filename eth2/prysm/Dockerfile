@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 
+FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update &&\
@@ -10,8 +10,9 @@ RUN wget https://github.com/bazelbuild/bazel/releases/download/0.25.1/bazel-0.25
 RUN chmod +x bazel-0.25.1-installer-linux-x86_64.sh
 RUN ./bazel-0.25.1-installer-linux-x86_64.sh
 
-RUN git clone https://github.com/prysmaticlabs/prysm.git 
+RUN git clone https://github.com/renaynay/prysm.git
 WORKDIR /prysm/
+RUN git checkout cli
 RUN bazel build //beacon-chain:beacon-chain
 
 FROM ubuntu:18.04
