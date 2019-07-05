@@ -20,4 +20,6 @@ RUN git pull
 
 RUN bazel build //beacon-chain
 
+RUN bazel build //validator
+
 ENTRYPOINT ["/bin/bash"]
