@@ -1,7 +1,6 @@
 FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND noninteractive
 
-WORKDIR /prysm/
 
 RUN apt-get update &&\
 	apt-get install -y apt-utils expect git git-extras software-properties-common \
@@ -12,7 +11,9 @@ RUN wget https://github.com/bazelbuild/bazel/releases/download/0.25.1/bazel-0.25
 RUN chmod +x bazel-0.25.1-installer-linux-x86_64.sh
 RUN ./bazel-0.25.1-installer-linux-x86_64.sh
 
+WORKDIR /
 RUN git clone https://github.com/renaynay/prysm.git
+WORKDIR /prysm/
 RUN git reset --hard HEAD
 RUN git checkout cli
 RUN git pull
