@@ -18,6 +18,6 @@ RUN git reset --hard HEAD
 RUN git checkout cli
 RUN git pull
 
-RUN bazel build //beacon-chain:beacon-chain
+RUN bazel build //beacon-chain
 
 ENTRYPOINT ["/bin/bash"]
