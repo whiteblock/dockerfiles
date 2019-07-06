@@ -12,7 +12,7 @@ RUN chmod +x bazel-0.25.1-installer-linux-x86_64.sh
 RUN ./bazel-0.25.1-installer-linux-x86_64.sh
 
 WORKDIR /
-RUN git clone https://github.com/renaynay/prysm.git
+RUN git clone https://github.com/whiteblock/prysm.git
 WORKDIR /prysm/
 RUN git reset --hard HEAD
 RUN git checkout cli
