@@ -32,6 +32,8 @@ RUN add-apt-repository ppa:ethereum/ethereum && \
 RUN ln -s /go-ethereum/build/bin/geth /usr/bin/geth
 
 WORKDIR /
+
+RUN git clone https://github.com/whiteblock/solc_resources.git
 #ENV PATH /go-ethereum/build/bin:${PATH}
 
 ENTRYPOINT ["/bin/bash"]
