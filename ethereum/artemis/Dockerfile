@@ -11,8 +11,8 @@ RUN add-apt-repository ppa:openjdk-r/ppa && \
     apt-get install -y openjdk-11-jdk && \
     rm -rf /var/lib/apt/lists/* 
 
-
 # get artemis
+RUN git clone https://github.com/whiteblock/solc_resources.git
 RUN git clone --recursive https://github.com/PegaSysEng/artemis.git
 WORKDIR artemis/
 RUN ./gradlew build -x test

@@ -16,6 +16,7 @@ RUN git checkout cli
 RUN bazel build //beacon-chain:beacon-chain
 
 FROM ubuntu:18.04
+RUN git clone https://github.com/whiteblock/solc_resources.git
 WORKDIR /
 COPY --from=0 bazel-bin/beacon-chain/darwin_amd64_stripped/beacon-chain .
 
