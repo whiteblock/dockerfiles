@@ -13,7 +13,7 @@ steps:
             'build',
             '-t', '$_IMAGE:$BRANCH_NAME',
             '-t', '$_IMAGE:$COMMIT_SHA',
-            '--cache-from', '$_IMAGE:$BRANCH_NAME',
+#            '--cache-from', '$_IMAGE:$BRANCH_NAME',
             '.'
         ]
   dir: '$_DIR'
