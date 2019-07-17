@@ -34,5 +34,6 @@ RUN apt-get update && apt-get install -y  vim iperf3 openssh-server telnet iprou
 COPY --from=built /parity-ethereum/target/release/parity /usr/local/bin/parity
 #COPY --from=built /usr/local/bin/geth /usr/local/bin/geth
 WORKDIR /
+RUN git clone https://github.com/whiteblock/solc_resources.git
 
 ENTRYPOINT ["/bin/bash"]
