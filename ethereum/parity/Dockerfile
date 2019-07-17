@@ -31,7 +31,7 @@ EXPOSE 8080 8545 8180
 FROM ubuntu:18.04 as final
 
 RUN apt-get update && apt-get install -y  vim iperf3 openssh-server telnet iproute2 libssl-dev iputils-ping tmux git \
-    python3.6 python3-pip
+    python3.6 python3-pip npm nodejs
 
 RUN npm install && npm install -g pm2
 RUN pip3 install vyper
