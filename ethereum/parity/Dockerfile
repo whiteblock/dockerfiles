@@ -30,7 +30,12 @@ EXPOSE 8080 8545 8180
 
 FROM ubuntu:18.04 as final
 
-RUN apt-get update && apt-get install -y  vim iperf3 openssh-server telnet iproute2 libssl-dev iputils-ping tmux git
+RUN apt-get update && apt-get install -y  vim iperf3 openssh-server telnet iproute2 libssl-dev iputils-ping tmux git \
+    python3.6 python3-pip
+
+RUN npm install && npm install -g pm2
+RUN pip3 install vyper
+
 COPY --from=built /parity-ethereum/target/release/parity /usr/local/bin/parity
 #COPY --from=built /usr/local/bin/geth /usr/local/bin/geth
 WORKDIR /
