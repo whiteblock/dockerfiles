@@ -4,9 +4,9 @@ RUN apt-get update &&\
     software-properties-common inetutils-tools wget ca-certificates curl \
     libssl-dev make iperf3 iputils-ping tmux build-essential git-extras \
     openssh-server
-RUN wget https://github.com/aionnetwork/aion/releases/download/v0.4.0.2/aion-v0.4.0.2.092068b-2019-06-12.tar.bz2
-RUN tar -xvf aion-v0.4.0.2.092068b-2019-06-12.tar.bz2
-RUN rm -rf aion-v0.4.0.2.092068b-2019-06-12.tar.bz2
+RUN wget https://github.com/aionnetwork/aion/releases/download/v0.4.1/aion-v0.4.1.897fb77-2019-07-12.tar.bz2
+RUN tar -xvf aion-v0.4.1.897fb77-2019-07-12.tar.bz2
+RUN rm -rf aion-v0.4.1.897fb77-2019-07-12.tar.bz2
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install -y nodejs
