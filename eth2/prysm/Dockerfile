@@ -17,7 +17,6 @@ WORKDIR /
 RUN git clone https://github.com/whiteblock/prysm.git
 WORKDIR /prysm/
 RUN git reset --hard HEAD
-RUN git checkout cli
 RUN git pull
 
 RUN bazel build //beacon-chain
