@@ -4,6 +4,7 @@ RUN apt-get update &&\
     software-properties-common inetutils-tools wget ca-certificates curl \
     libssl-dev make iperf3 iputils-ping tmux build-essential git-extras \
     openssh-server
+RUN apt-get install -y openjdk-11-jdk-headless openjdk-11-jre-headless
 RUN wget https://github.com/aionnetwork/aion/releases/download/v0.4.1/aion-v0.4.1.897fb77-2019-07-12.tar.bz2
 RUN tar -xvf aion-v0.4.1.897fb77-2019-07-12.tar.bz2
 RUN rm -rf aion-v0.4.1.897fb77-2019-07-12.tar.bz2
