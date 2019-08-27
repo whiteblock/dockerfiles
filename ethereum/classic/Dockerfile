@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y gcc make git
 
-ADD . /go-ethereum
+RUN git clone https://github.com/etclabscore/go-ethereum.git
 
 WORKDIR /go-ethereum
 
