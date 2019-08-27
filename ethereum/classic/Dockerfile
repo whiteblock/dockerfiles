@@ -9,7 +9,7 @@ ADD . /go-ethereum
 
 WORKDIR /go-ethereum
 
-RUN make cmd/geth
+RUN make
 
 # Pull Geth into a second stage deploy ubuntu container
 FROM ubuntu:18.04
