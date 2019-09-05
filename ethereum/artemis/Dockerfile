@@ -17,7 +17,7 @@ RUN git clone --recursive https://github.com/PegaSysEng/artemis.git
 WORKDIR artemis/
 RUN ./gradlew build -x test
 WORKDIR /artemis/build/distributions
-RUN tar -xzf artemis-1.0.0-SNAPSHOT.tar.gz
+RUN tar -xzf artemis-0.8.2-SNAPSHOT.tar.gz
 RUN ln -s /artemis/build/distributions/artemis-*-SNAPSHOT/bin/artemis /usr/bin/artemis
 WORKDIR /usr/local/bin
 RUN wget https://github.com/Whiteblock/artemis_log_EATER/releases/download/v1.5.10/artemis-log-parser && chmod +x /usr/local/bin/artemis-log-parser
