@@ -24,7 +24,7 @@ do
             IDENTITY=$VALUE
             ;;
         --peers)
-            PEERS=$VALUE
+            PEERS+=" $VALUE"
             ;;
         --num-validators)
             NUM_VALIDATORS=$VALUE
@@ -48,7 +48,7 @@ do
     shift
 done
 
-echo $PORT
+echo $PEERS
 
 # 4 params for start.sh:
     # identity (p2p-priv-key)
