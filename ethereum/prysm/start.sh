@@ -48,7 +48,6 @@ do
     shift
 done
 
-echo $PEERS
 
 # 4 params for start.sh:
     # identity (p2p-priv-key)
