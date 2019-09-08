@@ -17,6 +17,8 @@ RUN bazel build //beacon-chain:beacon-chain
 FROM ubuntu:18.04
 WORKDIR /
 COPY --from=0 bazel-bin/beacon-chain/darwin_amd64_stripped/beacon-chain .
+
+RUN mkdir /launch
 COPY start.sh /launch
 
 ENTRYPOINT ["/bin/bash"]
