@@ -11,7 +11,7 @@ usage() {
     echo "--peer=<peer>"
     echo "--validator-keys=<path to /launch/keys.yaml>"
     echo "--gen-state=<path to /launch/state.ssz>"
-    port "--port=<port>"
+    echo "--port=<port>"
 }
 
 while [ "$1" != "" ];
@@ -48,7 +48,7 @@ do
     shift
 done
 
-echo $PEERS
+echo $VALIDATOR_KEYS
 
 # 5 params for start.sh:
     # identity (p2p-priv-key)
