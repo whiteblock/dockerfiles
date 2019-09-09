@@ -1,14 +1,19 @@
 #!/bin/bash
 
+# Flags
 IDENTITY=""
 PEERS=""
-VALIDATOR_KEYS=""
+YAML_KEY_FILE=""
 GEN_STATE=""
 PORT="8000"
 
+# Constants
+BEACON_LOG_FILE="/tmp/beacon.log"
+VALIDATOR_LOG_FILE="/tmp/validator.log"
+
 usage() {
     echo "--identity=<hex prepresentation of the priv key for libp2p>"
-    echo "--peer=<peer>"
+    echo "--peers=<peer>"
     echo "--validator-keys=<path to /launch/keys.yaml>"
     echo "--gen-state=<path to /launch/state.ssz>"
     echo "--port=<port>"
@@ -23,8 +28,8 @@ do
         --identity)
             IDENTITY=$VALUE
             ;;
-        --peer)
-            PEERS+=" $VALUE"
+        --peers)
+            PEERS+=",$VALUE"
             ;;
         --validator-keys)
             VALIDATOR_KEYS=$VALUE
@@ -48,11 +53,3 @@ do
     shift
 done
 
-echo $VALIDATOR_KEYS
-
-# 5 params for start.sh:
-    # identity (p2p-priv-key)
-    # peers
-    # validator keys,
-    # genesis state (16KB -- pass a reference to a file in the docker container)
-    # port
