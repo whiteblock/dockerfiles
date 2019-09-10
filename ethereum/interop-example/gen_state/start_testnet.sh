@@ -8,11 +8,13 @@ NUMBER_OF_NODES=${#IMAGES[@]}
 IMAGES_STR="\""
 KEYS=""
 ARGS=""
+LAUNCH_SCRIPTS=""
 
 for (( i=0; i<$NUMBER_OF_NODES; i++ ))
 do
    ARGS+='{"validatorKeys":"/launch/keys.yaml","genesisState":"/launch/state.ssz"},'
    KEYS+="{\"./state.ssz\":\"/launch/state.ssz\",\"./keys_batch_$i.yaml\":\"/launch/keys.yaml\"},"
+   LAUNCH_SCRIPTS+='"/launch/start.sh",'
    IMAGES_STR+="${IMAGES[$i]}"
    IMAGES_STR+='","'
 done
@@ -27,6 +29,8 @@ JSON+='"],"params": {"args": ['
 JSON+=${ARGS::-1}
 JSON+='],"files": ['
 JSON+=${KEYS::-1}
+JSON+='],"launch-script": ['
+JSON+=${LAUNCH_SCRIPTS::-1}
 JSON+='],"libp2p": "true"}}'
 echo $JSON
 #curl -X POST http://localhost:8000/testnets/ -d $JSON -H "Authorization: Bearer $WB_JWT" -H "Content-Type: application/json"
