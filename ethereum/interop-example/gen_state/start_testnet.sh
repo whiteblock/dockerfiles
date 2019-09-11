@@ -10,10 +10,13 @@ KEYS=""
 ARGS=""
 LAUNCH_SCRIPTS=""
 
+cp state.ssz /tmp/
+cp key_batch_* /tmp/
+
 for (( i=0; i<$NUMBER_OF_NODES; i++ ))
 do
-   ARGS+='{"validatorKeys":"/launch/keys.yaml","genesisState":"/launch/state.ssz"},'
-   KEYS+="{\"./state.ssz\":\"/launch/state.ssz\",\"./keys_batch_$i.yaml\":\"/launch/keys.yaml\"},"
+   ARGS+='{"validator-keys":"/launch/keys.yaml","gen-state":"/launch/state.ssz"},'
+   KEYS+="{\"/tmp/state.ssz\":\"/launch/state.ssz\",\"/tmp/key_batch_$i.yaml\":\"/launch/keys.yaml\"},"
    LAUNCH_SCRIPTS+='"/launch/start.sh",'
    IMAGES_STR+="${IMAGES[$i]}"
    IMAGES_STR+='","'
@@ -21,6 +24,7 @@ done
 
 JSON='{
   "blockchain":"generic",
+  "servers":[1],
   "nodes":'
 JSON+=${#IMAGES[@]}
 JSON+=',"images":['
@@ -31,6 +35,13 @@ JSON+='],"files": ['
 JSON+=${KEYS::-1}
 JSON+='],"launch-script": ['
 JSON+=${LAUNCH_SCRIPTS::-1}
-JSON+='],"libp2p": "true"}}'
+JSON+='],"libp2p": "true","network-topology":"all"}}'
 echo $JSON
-#curl -X POST http://localhost:8000/testnets/ -d $JSON -H "Authorization: Bearer $WB_JWT" -H "Content-Type: application/json"
+CMD="curl -X POST http://localhost:8000/testnets/ -d '"
+CMD+=$JSON
+CMD+="' -H \"Authorization: Bearer "
+CMD+=$WB_JWT
+CMD+='" -H "Content-Type: application/json"'
+echo $CMD
+bash -c "$CMD"
+
