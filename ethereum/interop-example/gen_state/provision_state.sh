@@ -16,11 +16,15 @@ do
     SHARDS+=" "
 done
 
+rm key_batch*
+
 {
     sudo docker container run -id --name zcli zcli &>/dev/null
+    sudo docker exec zcli bash -c "rm ./key_batch*"
     sudo docker exec zcli zcli keys shard --keys keygen_10000_validators.yaml $SHARDS
     sudo docker exec zcli zcli genesis mock --count $(($1*$3)) --keys ./keygen_10000_validators.yaml --out ./state.ssz --genesis-time $2 &>/dev/null
 } || {
+    sudo docker exec zcli bash -c "rm ./key_batch*"
     sudo docker exec zcli zcli keys shard --keys keygen_10000_validators.yaml $SHARDS
     sudo docker exec zcli zcli genesis mock --count $(($1*$3)) --keys ./keygen_10000_validators.yaml --out ./state.ssz --genesis-time $2 &>/dev/null
 }
