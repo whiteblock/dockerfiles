@@ -1,7 +1,7 @@
 substitutions:
   _IMAGE: 'gcr.io/whiteblock/ethstats'
   _DIR: 'ethstats'
-timeout: '10m'
+timeout: '600s'
 steps:
 # allow these steps to fail, they try to pull cache first
 - name: 'gcr.io/cloud-builders/docker'
