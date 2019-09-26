@@ -10,4 +10,4 @@ RUN git clone https://github.com/cubedro/eth-netstats && \
 
 WORKDIR /eth-netstats
 
-CMD "npm start"
+CMD ["npm", "start"]
