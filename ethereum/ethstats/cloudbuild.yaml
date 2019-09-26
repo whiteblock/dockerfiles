@@ -1,6 +1,6 @@
 substitutions:
   _IMAGE: 'gcr.io/whiteblock/ethstats'
-  _DIR: 'ethstats'
+  _DIR: 'ethereum/ethstats'
 timeout: '600s'
 steps:
 # allow these steps to fail, they try to pull cache first
