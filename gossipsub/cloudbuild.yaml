@@ -1,5 +1,5 @@
 substitutions:
-  _IMAGE: 'gcr.io/whiteblock/gossip'
+  _IMAGE: 'gcr.io/whiteblock/gossipsub'
   _DIR: 'gossipsub'
 timeout: '90m'
 steps:
