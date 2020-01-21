@@ -1,7 +1,7 @@
 FROM golang:1.13-alpine
   
 RUN apk update && \
-    apk add --no-cache make gcc musl-dev linux-headers git sudo bash tmux
+    apk add --no-cache make gcc musl-dev linux-headers git sudo bash tmux jq
 WORKDIR /
 #RUN git clone https://github.com/agencyenterprise/go-libp2p-pubsub-benchmark-tools
 #WORKDIR go-libp2p-pubsub-benchmark-tools
