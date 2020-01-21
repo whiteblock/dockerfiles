@@ -1,0 +1,22 @@
+substitutions:
+  _IMAGE: 'gcr.io/whiteblock/btc-lightning/btcd'
+  _DIR: 'btc-lightning/btcd'
+timeout: '90m'
+steps:
+  # build final docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', '$_IMAGE:$BRANCH_NAME',
+      '-t', '$_IMAGE:$COMMIT_SHA',
+      #            '--cache-from', '$_IMAGE:$BRANCH_NAME',
+      '.'
+    ]
+    dir: '$_DIR'
+  # push docker image tag(s) one branch, one immutable
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', '$_IMAGE:$COMMIT_SHA' ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', '$_IMAGE:$BRANCH_NAME' ]
+options:
+  machineType: 'N1_HIGHCPU_8'
