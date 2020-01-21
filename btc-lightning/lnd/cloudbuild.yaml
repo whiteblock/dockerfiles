@@ -3,10 +3,6 @@ substitutions:
   _DIR: 'btc-lightning/lnd'
 timeout: '90m'
 steps:
-  # allow these steps to fail, they try to pull cache first
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args: ['-c', 'docker pull $_IMAGE:$BRANCH_NAME || true' ]
   # build final docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: [
