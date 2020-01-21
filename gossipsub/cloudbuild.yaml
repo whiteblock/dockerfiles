@@ -3,8 +3,6 @@ substitutions:
   _DIR: 'gossipsub'
 timeout: '90m'
 steps:
-# allow these steps to fail, they try to pull cache first
-- name: 'gcr.io/cloud-builders/docker'
 # build final docker image
 - name: 'gcr.io/cloud-builders/docker'
   args: [
