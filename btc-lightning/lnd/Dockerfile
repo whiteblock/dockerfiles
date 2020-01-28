@@ -32,6 +32,12 @@ COPY --from=builder /go/bin/lnd /bin/
 RUN apk add --no-cache \
     bash
 
+RUN ca-certificates \
+&&  mkdir "/rpc" "/root/.lnd" \
+&& "/bin/gencerts" --host="*" --directory="/rpc" --force
+
 # Copy the entrypoint script.
 ADD 'https://raw.githubusercontent.com/lightningnetwork/lnd/master/docker/lnd/start-lnd.sh' ./start-lnd.sh
 RUN chmod +x start-lnd.sh
+
+VOLUME ["/rpc"]
