@@ -44,7 +44,7 @@ RPCPASS=$(set_default "$RPCPASS" "devpass")
 DEBUG=$(set_default "$DEBUG" "debug")
 NETWORK=$(set_default "$NETWORK" "testnet")
 CHAIN=$(set_default "$CHAIN" "bitcoin")
-BTCD_HOST=$(set_default "$BTCD_HOST" "172.17.0.2:18555")
+BTCD_HOST=$(set_default "$BTCD_HOST" "tcp://172.17.0.2:18555")
 BACKEND="btcd"
 
 exec lnd \
