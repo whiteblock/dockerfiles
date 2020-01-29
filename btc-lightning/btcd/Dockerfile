@@ -52,3 +52,6 @@ RUN apk add --no-cache \
 # Otherwise manually generated certificate will be overridden with shared
 # mounted volume! For more info read dockerfile "VOLUME" documentation.
 VOLUME ["/rpc"]
+
+ENTRYPOINT ["/bin/sh"]
+RUN ./start-btcd.sh

@@ -33,7 +33,7 @@ RUN apk add --no-cache \
     bash
 
 # Copy the entrypoint script.
-ADD "" ./start-lnd.sh
+ADD "https://raw.githubusercontent.com/whiteblock/dockerfiles/fix-lnd/btc-lightning/lnd/start-lnd.sh" ./start-lnd.sh
 RUN chmod +x start-lnd.sh
 
 RUN mkdir rpc && cd rpc && touch rpc.cert
