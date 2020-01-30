@@ -39,4 +39,3 @@ RUN chmod +x start-lnd.sh
 RUN mkdir rpc && cd rpc && touch rpc.cert
 
 ENTRYPOINT ["/bin/sh"]
-RUN ./start-lnd.sh

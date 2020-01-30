@@ -54,4 +54,3 @@ RUN apk add --no-cache \
 VOLUME ["/rpc"]
 
 ENTRYPOINT ["/bin/sh"]
-RUN ./start-btcd.sh
