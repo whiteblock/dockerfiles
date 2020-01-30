@@ -33,7 +33,7 @@ COPY --from=builder /go/bin/btcd /bin/
 COPY --from=builder /go/bin/findcheckpoint /bin/
 COPY --from=builder /go/bin/gencerts /bin/
 
-ADD 'https://raw.githubusercontent.com/lightningnetwork/lnd/master/docker/btcd/start-btcd.sh' ./start-btcd.sh
+ADD 'https://raw.githubusercontent.com/whiteblock/dockerfiles/fix-lnd/btc-lightning/btcd/start-btcd.sh' ./start-btcd.sh
 
 RUN apk add --no-cache \
     bash \
