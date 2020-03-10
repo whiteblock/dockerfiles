@@ -1,19 +1,14 @@
 substitutions:
   _IMAGE: 'gcr.io/whiteblock/geth'
   _DIR: 'ethereum/geth'
-timeout: '90m'
+timeout: '20m'
 steps:
-# allow these steps to fail, they try to pull cache first
-- name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'bash'
-  args: ['-c', 'docker pull $_IMAGE:$BRANCH_NAME || true' ]
 # build final docker image
 - name: 'gcr.io/cloud-builders/docker'
   args: [
             'build',
             '-t', '$_IMAGE:$BRANCH_NAME',
             '-t', '$_IMAGE:$COMMIT_SHA',
-#            '--cache-from', '$_IMAGE:$BRANCH_NAME',
             '.'
         ]
   dir: '$_DIR'
